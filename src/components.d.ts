@@ -6,56 +6,81 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface RfLogin {
+        "hide": boolean;
+    }
+    interface RfRegister {
+        "hide": boolean;
     }
 }
+export interface RfLoginCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRfLoginElement;
+}
+export interface RfRegisterCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRfRegisterElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRfLoginElementEventMap {
+        "rfEmit": boolean;
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLRfLoginElement extends Components.RfLogin, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRfLoginElementEventMap>(type: K, listener: (this: HTMLRfLoginElement, ev: RfLoginCustomEvent<HTMLRfLoginElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRfLoginElementEventMap>(type: K, listener: (this: HTMLRfLoginElement, ev: RfLoginCustomEvent<HTMLRfLoginElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRfLoginElement: {
+        prototype: HTMLRfLoginElement;
+        new (): HTMLRfLoginElement;
+    };
+    interface HTMLRfRegisterElementEventMap {
+        "rfEmitter": boolean;
+    }
+    interface HTMLRfRegisterElement extends Components.RfRegister, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRfRegisterElementEventMap>(type: K, listener: (this: HTMLRfRegisterElement, ev: RfRegisterCustomEvent<HTMLRfRegisterElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRfRegisterElementEventMap>(type: K, listener: (this: HTMLRfRegisterElement, ev: RfRegisterCustomEvent<HTMLRfRegisterElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRfRegisterElement: {
+        prototype: HTMLRfRegisterElement;
+        new (): HTMLRfRegisterElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "rf-login": HTMLRfLoginElement;
+        "rf-register": HTMLRfRegisterElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface RfLogin {
+        "hide"?: boolean;
+        "onRfEmit"?: (event: RfLoginCustomEvent<boolean>) => void;
+    }
+    interface RfRegister {
+        "hide"?: boolean;
+        "onRfEmitter"?: (event: RfRegisterCustomEvent<boolean>) => void;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "rf-login": RfLogin;
+        "rf-register": RfRegister;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "rf-login": LocalJSX.RfLogin & JSXBase.HTMLAttributes<HTMLRfLoginElement>;
+            "rf-register": LocalJSX.RfRegister & JSXBase.HTMLAttributes<HTMLRfRegisterElement>;
         }
     }
 }

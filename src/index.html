@@ -9,6 +9,11 @@
     <script nomodule src="/build/reg-login.js"></script>
   </head>
   <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+    <rf-register></rf-register>
+    <rf-login></rf-login>
+    <script>
+      const register = document.querySelector('rf-register');
+      const login = document.querySelector('rf-login');
+    </script>
   </body>
 </html>
